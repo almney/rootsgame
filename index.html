@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3HNS6240FD"></script>
-<script>
-    <meta name="google-site-verification" content="XjEYS_eOqc2Cz8yp6LO-jmoWnkF2CQNkXBdyf2EX71s" />
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3HNS6240FD');
-</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canada Savings Calculator | Future Wealth & Investment Planner</title>
-    <meta name="description" content="Calculate your future savings and investment growth in Canada. Free client-side financial planner for compounding interest, TFSA, and RRSP goals.">
-    
-    <!-- Tailwind CSS for modern, professional Western-style UI -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        canadaRed: '#FF0000',
-                    }
-                }
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Welcome to Roots & Feathers Arcade! Play addictive browser farming games, solve puzzle challenges, and collect suns to level up your farm.">
+    <meta name="keywords" content="Farming Game, Idle Clicker, Roots and Feathers, Garden Puzzles, Arcade Games">
+    <title>Roots & Feathers | Arcade Hub</title>
+    <style>
+        :root { --primary: #27ae60; --dark: #1a252f; --panel: #2c3e50; --text: #ecf0f1; }
+        
+        /* منع التحديد والتقريب باللمس في الجوال لحماية الألعاب */
+        * { box-sizing: border-box; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+        
+        body { background-color: var(--dark); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background: #162029; padding: 1rem; text-align: center; border-bottom: 3px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        
+        /* حاوية مرنة تتكيف مع الكمبيوتر والشاشة الجوالة */
+        .page-wrapper { display: flex; justify-content: space-between; flex: 1; padding: 15px; gap: 15px; width: 100%; max-width: 1400px; margin: 0 auto; }
+        
+        /* الإعلانات الجانبية */
+        .ad-sidebar { width: 160px; min-width: 160px; background: #162029; border: 1px dashed #3e5871; display: flex; justify-content: center; align-items: center; border-radius: 10px; }
+        
+        .dashboard { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .main-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .side-panel { background: var(--panel); padding: 20px; border-radius: 15px; border: 1px solid #3e5871; height: fit-content; }
+        
+        .card { background: var(--panel); padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #3e5871; transition: 0.3s; position: relative; }
+        .card img.game-icon { width: 70px; height: 70px; object-fit: contain; margin: 10px auto; display: block; }
+        
+        button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; font-size: 15px; }
+        button:active { transform: scale(0.98); }
+        .stat-val { color: var(--primary); font-size: 1.3rem; font-weight: bold; }
+        
+        .horizontal-ad-box { width: 100%; margin: 10px auto; text-align: center; min-height: 90px; background: #162029; border: 1px dashed #3e5871; display: flex; justify-content: center; align-items: center; border-radius: 8px; font-size: 12px; }
+
+        #game-stage { position: relative; width: 100%; height: 220px; background: #162029; border-radius: 10px; border: 2px inset #3e5871; overflow: hidden; margin-top: 10px; cursor: pointer; }
+        .sun-falling { position: absolute; width: 35px; height: 35px; cursor: pointer; animation: fallDown 3.5s linear forwards; z-index: 10; }
+        @keyframes fallDown { from { top: -40px; } to { top: 100%; } }
+        
+        .floating-text { position: absolute; color: #f1c40f; font-weight: bold; font-size: 16px; animation: floatUp 0.8s ease-out forwards; pointer-events: none; z-index: 20; }
+        @keyframes floatUp { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-40px); } }
+
+        /* نافذة المودال المتجاوبة مع الجوال */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+        .modal-content { background: var(--panel); padding: 30px 20px; border-radius: 20px; text-align: center; position: relative; border: 2px solid var(--primary); width: 100%; max-width: 320px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); }
+        .close-btn { position: absolute; top: 5px; right: 15px; font-size: 32px; cursor: pointer; color: #aaa; }
+        #ans { padding: 10px; width: 90%; border: 1px solid #3e5871; border-radius: 5px; background: #1a252f; color: white; font-size: 18px; text-align: center; margin-bottom: 15px; }
+        
+        /* 📱 تعديلات ذكية خاصة بالجوال فقط لتنظيف المظهر 📱 */
+        @media (max-width: 768px) {
+            .ad-sidebar { display: none; } /* إخفاء الإعلانات العمودية لأنها تدمر الجوال */
+            .page-wrapper { padding: 10px; flex-direction: column; }
+            .main-panel { grid-template-columns: 1fr; } /* الألعاب تترتب تحت بعض بشكل رائع */
+            .card[style*="grid-column"] { grid-column: auto !important; }
+            header h1 { font-size: 20px; }
+            .horizontal-ad-box { max-width: 100%; min-height: 50px; } /* تصغير مساحة البنرات لتناسب شاشة الموبايل */
         }
-    </script>
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-slate-200 py-4 px-6 shadow-sm">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl">🍁</span>
-                <span class="font-bold text-xl tracking-tight text-slate-900">CanSave <span class="text-emerald-600">Planner</span></span>
-            </div>
-            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">100% Free & Secure</span>
-        </div>
-    </header>
-
-    <!-- Main Content Container -->
-    <main class="max-w-4xl w-full mx-auto p-4 my-6 flex-grow">
+<header>
+    <h1>🌱 Roots & Feathers Arcade</h1>
+    
+    <!-- 💰 1. إعلان بنر علوي متجاوب ومصلح -->
+    <div class="horizontal-ad-box">
         <script>
   atOptions = {
     'key' : 'e6e9e27325ea833b7b47036fb5a458cb',
@@ -55,155 +76,221 @@
 </script>
 <script src="https://www.highperformanceformat.com/e6e9e27325ea833b7b47036fb5a458cb/invoke.js"></script>
 
-        <!-- Top Ad Placeholder (Attractive for Flippa Buyers) -->
-        <div class="w-full bg-slate-200/60 border border-dashed border-slate-300 text-center py-3 rounded-lg text-xs text-slate-500 mb-6 tracking-wider uppercase font-medium">
-            [
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-            
-            <!-- Inputs Column (Left) -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 md:col-span-2">
-                <h2 class="text-lg font-bold text-slate-900 mb-4 border-b pb-2">Your Financial Inputs</h2>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Initial Deposit ($ CAD)</label>
-                        <input type="number" id="initialAmount" value="5000" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Monthly Contribution ($ CAD)</label>
-                        <input type="number" id="monthlyContribution" value="200" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Annual Interest Rate (%)</label>
-                        <input type="number" id="interestRate" value="6" step="0.1" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Time Horizon (Years)</label>
-                        <input type="number" id="years" value="10" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none font-medium">
-                    </div>
-
-                    <button onclick="calculateSavings()" class="w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-emerald-700 transition duration-150 shadow-sm mt-2">
-                        Calculate Growth
-                    </button>
-                </div>
-            </div>
-
-            <!-- Results Column (Right) -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 md:col-span-3 flex flex-col justify-between">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-900 mb-4 border-b pb-2">Future Wealth Projections</h2>
-                    
-                    <div class="grid grid-cols-1 gap-4 mt-4">
-                        <div class="bg-emerald-50/50 border border-emerald-100 p-4 rounded-xl">
-                            <p class="text-sm text-emerald-800 font-medium">Total Future Balance</p>
-                            <p class="text-3xl font-extrabold text-emerald-700 mt-1" id="totalBalance">$37,760.10</p>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                <p class="text-xs text-slate-500 font-medium">Total Principal Invested</p>
-                                <p class="text-base font-bold text-slate-800 mt-0.5" id="totalPrincipal">$29,000.00</p>
-                            </div>
-                            <div class="bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                                <p class="text-xs text-blue-800 font-medium">Total Interest Earned</p>
-                                <p class="text-base font-bold text-blue-700 mt-0.5" id="totalInterest">$8,760.10</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Small inside Ad or disclaimer placeholder -->
-                <div class="mt-6 text-[10px] text-slate-400 border-t pt-3 text-center leading-relaxed">
-                    Disclaimer: This calculator is for educational and illustrative purposes only. Financial projections do not guarantee actual future market returns.
-                </div>
-            </div>
-
-        </div>
-
-        <!-- SEO Content Section (Crucial to rank on Google Canada) -->
-        <section class="max-w-4xl mx-auto p-8 bg-white shadow-sm rounded-2xl mt-8 text-slate-700 leading-relaxed">
-    <h2 class="text-3xl font-bold text-slate-900 mb-6">The Essential Guide to Smart Savings in Canada 2026</h2>
-    
-    <p class="mb-4">Achieving financial freedom in Canada requires more than just luck; it requires a strategy. With the rising cost of living, optimizing your <strong>TFSA (Tax-Free Savings Account)</strong> and <strong>RRSP (Registered Retirement Savings Plan)</strong> contributions is the most effective way to build long-term wealth.</p>
-
-    <h3 class="text-xl font-bold text-slate-800 mt-6 mb-3">Maximizing Your TFSA vs. RRSP Contributions</h3>
-    <p class="mb-4">Many Canadians are confused about where to put their money first. A TFSA is perfect for short-to-medium-term goals, as your withdrawals are tax-free. In contrast, an RRSP is designed for retirement, offering an immediate tax deduction that can lower your annual taxable income. Our calculator helps you visualize how these different vehicles grow when you maximize your contributions early.</p>
-
-    <h3 class="text-xl font-bold text-slate-800 mt-6 mb-3">The Mathematical Magic of Compound Interest</h3>
-    <p class="mb-4">Compound interest is often called the "eighth wonder of the world." In the Canadian banking context, even a 1% difference in your annual interest rate can result in tens of thousands of dollars difference over a 20-year horizon. By using our tool, you can see how steady, disciplined monthly deposits act as a hedge against inflation.</p>
-
-    <h3 class="text-xl font-bold text-slate-800 mt-6 mb-3">Common Canadian Savings Pitfalls to Avoid</h3>
-    <ul class="list-disc pl-6 space-y-2 mb-6">
-        <li><strong>Waiting for the "Perfect Time":</strong> Market timing is impossible. Consistent, dollar-cost averaging is the proven method for success.</li>
-        <li><strong>Ignoring Investment Fees:</strong> High Management Expense Ratios (MER) in Canadian mutual funds can eat into your compounding growth.</li>
-        <li><strong>Failing to Reinvest Dividends:</strong> Your biggest growth lever is often ignored when you cash out dividends instead of reinvesting them.</li>
-    </ul>
-
-    <h3 class="text-xl font-bold text-slate-800 mt-6 mb-3">Frequently Asked Questions (FAQ)</h3>
-    <div class="space-y-4">
-        <div>
-            <p class="font-semibold text-slate-900">Q: What is a good interest rate for long-term savings in Canada?</p>
-            <p>A: While high-interest savings accounts (HISA) vary, long-term investors in diversified ETFs often target historical averages of 6-8%, though this fluctuates with market conditions.</p>
-        </div>
-        <div>
-            <p class="font-semibold text-slate-900">Q: Can I use this calculator for my children's RESP?</p>
-            <p>A: Absolutely. You can treat the inputs as your child’s educational savings, though be sure to factor in the Canada Education Savings Grant (CESG) separately.</p>
-        </div>
-    </div>
-</section>
-        <!-- Bottom Ad Placeholder -->
-        <div class="w-full bg-slate-200/60 border border-dashed border-slate-300 text-center py-3 rounded-lg text-xs text-slate-500 mt-6 tracking-wider uppercase font-medium">
-             <script>
+        <script>
   atOptions = {
-    'key' : 'e9c54d986af66dfb1fb125631c08d73e',
+    'key' : 'e6e9e27325ea833b7b47036fb5a458cb',
     'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
+    'height' : 90,
+    'width' : 728,
     'params' : {}
   };
 </script>
-<script src="https://www.highperformanceformat.com/e9c54d986af66dfb1fb125631c08d73e/invoke.js"></script>
- 
+<script src="https://www.highperformanceformat.com/e6e9e27325ea833b7b47036fb5a458cb/invoke.js"></script>
+
+  </div>
+
+    <div style="font-size: 1rem; margin-top: 5px;">Coins: <span id="balance" class="stat-val">0</span> | Level: <span id="lvl" class="stat-val">1</span></div>
+</header>
+
+<div class="page-wrapper">
+    
+    <!-- 💰 إعلان عمودي جانبي أيسر -->
+    <div class="ad-sidebar">
+    <script>
+  atOptions = {
+    'key' : '3773decb8380126d4f207db46d7efea5',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/3773decb8380126d4f207db46d7efea5/invoke.js"></script>
+    </div>
+
+    <div class="dashboard">
+        <div class="main-panel">
+            <div class="card">
+                <h3>Farm Clicker</h3>
+                <img class="game-icon" src="https://i.ibb.co/v3m6YxG/plant-icon.png" onerror="this.src='https://cdn-icons-png.flaticon.com/128/188/188333.png'" alt="Plant">
+                <button onclick="Game.clicker()">Plant & Harvest</button>
+            </div>
+            
+            <div class="card">
+                <h3>Math Roots</h3>
+                <img class="game-icon" src="https://i.ibb.co/TMjPtcC/puzzle-icon.png" onerror="this.src='https://cdn-icons-png.flaticon.com/128/3094/3094223.png'" alt="Puzzle">
+                <button onclick="UI.openModal()">Solve Challenge</button>
+            </div>
+            
+            <div class="card">
+                <h3>Sun Collector</h3>
+                <p style="margin: 0; color: #bdc3c7; font-size: 13px;">Tap box to drop suns, then catch them!</p>
+                <div id="game-stage" onclick="Game.triggerSunDrop(event)"></div>
+            </div>
         </div>
 
-    </main>
+        <div class="side-panel">
+            <h3>🏆 Stats & Goals</h3>
+            <p style="margin: 5px 0;">Total Puzzles Solved: <span id="puzzCount">0</span></p>
+            <p style="margin: 5px 0;">Global Power: <span id="pwr">1</span>x</p>
+            <hr style="border: 0; border-top: 1px solid #3e5871; margin: 10px 0;">
+            <p style="margin: 5px 0;">Next Level Progress:</p>
+            <progress id="prog" value="0" max="1000" style="width:100%; height:15px; border-radius: 5px; overflow: hidden;"></progress>
+            <button id="btn-upgrade" style="background: #e67e22;" onclick="Game.upgrade()">Upgrade Farm (Cost 500)</button>
+        </div>
+        
+        <!-- 💰 3. إعلان بنر سفلي نظيف ومستقر -->
+        <div class="horizontal-ad-box">
+           <script>
+  atOptions = {
+    'key' : 'e6e9e27325ea833b7b47036fb5a458cb',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/e6e9e27325ea833b7b47036fb5a458cb/invoke.js"></script>
+        </div>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 text-xs text-center py-4 border-t border-slate-800">
-        <p>&copy; 2026 CanSave Planner Canada. Built with high-speed client-side technology.</p>
-    </footer>
+    <!-- 💰 إعلان عمودي جانبي أيمن -->
+    <div class="ad-sidebar">
+      <script>
+  atOptions = {
+    'key' : '3773decb8380126d4f207db46d7efea5',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/3773decb8380126d4f207db46d7efea5/invoke.js"></script>
 
-    <!-- Interactive Pure JavaScript Core (No External Server Needed) -->
-    <script>
-        function calculateSavings() {
-            const initialAmount = parseFloat(document.getElementById('initialAmount').value) || 0;
-            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
-            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            const years = parseInt(document.getElementById('years').value) || 0;
 
-            const monthlyRate = (annualRate / 100) / 12;
-            const totalMonths = years * 12;
+    </div>
+</div>
 
-            let total = initialAmount;
-            let totalInvested = initialAmount;
+<div id="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="UI.closeModal()">&times;</span>
+        <h3>Garden Math</h3>
+        <p id="mathQ" style="font-size: 20px; font-weight: bold; margin: 15px 0;"></p>
+        <input type="number" id="ans" inputmode="numeric" placeholder="Enter answer">
+        <button onclick="Game.checkMath()">Submit & Verify</button>
+    </div>
+</div>
 
-            for (let i = 0; i < totalMonths; i++) {
-                total = (total + monthlyContribution) * (1 + monthlyRate);
-                totalInvested += monthlyContribution;
+<script>
+    const Game = {
+        state: { coins: 0, lvl: 1, puzzles: 0, pwr: 1, upgradeCost: 500, upgradeClicks: 0 },
+        currentAnswer: 0,
+        
+        loadState() {
+            let data = localStorage.getItem('arcadeData');
+            if (data) {
+                try {
+                    let parsed = JSON.parse(data);
+                    this.state.coins = isNaN(parsed.coins) || parsed.coins === undefined ? 0 : parsed.coins;
+                    this.state.lvl = isNaN(parsed.lvl) || parsed.lvl === undefined ? 1 : parsed.lvl;
+                    this.state.puzzles = isNaN(parsed.puzzles) || parsed.puzzles === undefined ? 0 : parsed.puzzles;
+                    this.state.pwr = isNaN(parsed.pwr) || parsed.pwr === undefined ? 1 : parsed.pwr;
+                    this.state.upgradeCost = isNaN(parsed.upgradeCost) || parsed.upgradeCost === undefined ? 500 : parsed.upgradeCost;
+                    this.state.upgradeClicks = isNaN(parsed.upgradeClicks) || parsed.upgradeClicks === undefined ? 0 : parsed.upgradeClicks;
+                } catch(e) { console.log("Resetting corrupted data"); }
             }
-
-            const interestEarned = total - totalInvested;
-
-            // Update UI with formatted Canadian Currency Style
-            document.getElementById('totalBalance').innerText = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(total);
-            document.getElementById('totalPrincipal').innerText = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(totalInvested);
-            document.getElementById('totalInterest').innerText = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(interestEarned > 0 ? interestEarned : 0);
+        },
+        init() { this.loadState(); UI.refresh(); },
+        clicker() { this.state.coins += (1 * this.state.pwr); UI.refresh(); },
+        
+        triggerSunDrop(event) {
+            if (event.target.classList.contains('sun-falling')) return;
+            let stage = document.getElementById('game-stage');
+            let count = Math.floor(Math.random() * 3) + 2; 
+            
+            for (let i = 0; i < count; i++) {
+                let sun = document.createElement('img');
+                sun.src = 'https://cdn-icons-png.flaticon.com/128/869/869869.png';
+                sun.className = 'sun-falling';
+                sun.style.left = Math.random() * 85 + '%';
+                sun.style.animationDuration = (Math.random() * 1.2 + 1.8) + 's'; 
+                
+                let harvest = function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    Game.state.coins += (10 * Game.state.pwr);
+                    
+                    let text = document.createElement('span');
+                    text.className = 'floating-text';
+                    text.innerText = '+' + (10 * Game.state.pwr);
+                    text.style.left = sun.style.left;
+                    text.style.top = sun.offsetTop + 'px';
+                    stage.appendChild(text);
+                    setTimeout(() => text.remove(), 800);
+                    
+                    UI.refresh();
+                    sun.remove();
+                };
+                
+                sun.ontouchstart = harvest;
+                sun.onclick = harvest;
+                
+                stage.appendChild(sun);
+                setTimeout(() => { if(sun.parentNode) sun.remove(); }, 3500);
+            }
+        },
+        
+        generateMathProblem() {
+            let num1 = Math.floor(Math.random() * 30) + 10;
+            let num2 = Math.floor(Math.random() * 30) + 10;
+            this.currentAnswer = num1 + num2;
+            document.getElementById('mathQ').innerText = `What is ${num1} + ${num2}?`;
+            document.getElementById('ans').value = '';
+        },
+        checkMath() {
+            let userAnswer = document.getElementById('ans').value;
+            if (userAnswer == this.currentAnswer) {
+                this.state.coins += 200;
+                this.state.puzzles++;
+                UI.closeModal();
+                UI.refresh();
+            } else { alert("Incorrect answer!"); }
+        },
+        
+        upgrade() {
+            if (this.state.coins >= this.state.upgradeCost) {
+                this.state.coins -= this.state.upgradeCost;
+                this.state.pwr++;
+                this.state.upgradeCost = this.state.upgradeCost * 2;
+                
+                // 💰 5. إعلان المنبثق الذكي يفتح في صفحة جديدة كل 3 ضغطات
+                this.state.upgradeClicks++;
+                if (this.state.upgradeClicks >= 3) {
+                    this.state.upgradeClicks = 0;
+                    window.open('https://www.effectivecpmnetwork.com/s6sa7816ba?key=774efd03db269bcb7bc88442967b8fdc', '_blank');
+                    
+                }
+                UI.refresh();
+            } else { alert(`You need ${this.state.upgradeCost} coins!`); }
         }
-    </script>
+    };
+
+    const UI = {
+        refresh() {
+            Game.state.lvl = Math.floor(Game.state.coins / 1000) + 1;
+            document.getElementById('balance').innerText = Math.floor(Game.state.coins);
+            document.getElementById('lvl').innerText = Game.state.lvl;
+            document.getElementById('puzzCount').innerText = Game.state.puzzles;
+            document.getElementById('pwr').innerText = Game.state.pwr;
+            document.getElementById('prog').value = Game.state.coins % 1000;
+            document.getElementById('btn-upgrade').innerText = `Upgrade Farm (Cost ${Game.state.upgradeCost})`;
+            localStorage.setItem('arcadeData', JSON.stringify(Game.state));
+        },
+        openModal() { Game.generateMathProblem(); document.getElementById('modal').style.display = 'flex'; },
+        closeModal() { document.getElementById('modal').style.display = 'none'; }
+    };
+    
+    Game.init();
+</script>
 </body>
 </html>
